@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>FitUVCE</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+      <style>
+         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+         :root{
+         --primary-color: #0b62e3;
+         --secondary-color: #fff;
+         --font: 'Oswald', sans-serif;
+         }
+         *{
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         font-family: var(--font);
+         }
+         .primary-color{
+         color: var(--primary-color);
+         }
+         .btn{
+         font-family: var(--font);
+         text-transform: none;
+         padding: 14px 44px;
+         border: 2px solid var(--secondary-color);
+         cursor: pointer;
+         font-size: 18px;
+         font-weight: 600;
+         letter-spacing: 1px;
+         line-height: 0;
+         margin-bottom: 0;
+         position: relative;
+         overflow: hidden;
+         text-decoration: none;
+         color: var(--secondary-color);
+         }
+         .btn:before{
+         content: "";
+         position: absolute;
+         left: 0;
+         top: 0;
+         width: 100%;
+         height: 100%;
+         transition: transform 0.5s;
+         transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
+         opacity: .4;
+         transform: translateX(-100%);
+         }
+         .btn-primary{
+         background: var(--primary-color);
+         border-radius: 200px;
+         }
+         .btn-secondary{
+         background: transparent;
+         border-radius: 200px;
+         }
+         .btn-primary:before{
+         background: #000;
+         border-radius: 200px;   
+         }
+         .btn-secondary:before{
+         background: var(--primary-color);
+         border-radius: 200px;
+         }
+         .btn:hover:before{
+         transform: translateX(0);
+         display: block;
+         }
+         body{
+         background: #000;
+         }
+         header{
+         position: absolute;
+         width: 100%;
+         top: 0;
+         right: 0;
+         z-index: 1000;
+         height: 120px;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         background: #000;
+         padding: 28px 12%;
+         transition: all .50s ease;
+         }
+         .logo{
+         color: var(--secondary-color);
+         font-size: 40px;
+         }
+         .logo h3 span{
+         transition: 0.5s;
+         }
+         .logo h3:hover span:nth-child(1)
+         {
+         margin-right: 4px;
+         }
+         .logo h3:hover span:nth-child(1):after
+         {
+         content: '';
+         }
+         .logo h3:hover span:nth-child(2)
+         {
+         margin-left: 4px;
+         }
+         .logo h3:hover span{
+         color:#0b62e3;
+         text-shadow: 0 0 10px #0b62e3;
+         0 0 20px #0b62e3;
+         0 0 40px #0b62e3;
+         0 0 80px #0b62e3;
+         0 0 100px #0b62e3;
+         }
+         .nav-menu{
+         display: flex;
+         flex-wrap: wrap;
+         align-items: center;
+         list-style: none;
+         }
+         .nav-menu a{
+         margin: 0 1.5rem;
+         color: var(--secondary-color);
+         font-weight: 500;
+         font-size: 18px;
+         transition: .3s ease;
+         text-transform: uppercase;
+         text-decoration: underline transparent;
+         }
+         .nav-menu a:hover{
+         text-decoration-color: var(--secondary-color);
+         }
+         .contactBTn{
+         padding: 25px 44px;
+         display: flex;
+         }
+         @media only screen and (max-width: 1280px)
+         {
+         header{
+         padding: 14px 2%;
+         transition: .2s;
+         }
+         .nav-menu a{
+         padding: 5px 0;
+         margin: 0px 20px;
+         }
+         }
+         @media (max-width: 1090px)
+         {
+         .nav-menu{
+         display: flex;
+         align-content: center;
+         height: 0;
+         position: absolute;
+         top: 80px;
+         left: 0;
+         right: 0;
+         width: 100vw;
+         background: #11101b;
+         transition: 0.2s;
+         margin-left: 14px;
+         }
+         .nav-menu a{
+         display: block;
+         font-size: 16px;
+         margin: 6px 0;
+         margin-top: 100px;
+         padding: 0px 10px;
+         transition: all .5s ease;
+         }
+         .nav-menu ul{
+         display: block;
+         align-content: center;
+         width: fit-content;
+         margin: 80px auto 0 auto;
+         text-align: center;
+         }
+         }
+         .my-section{
+         height: 100vh;
+         width: 100%;
+         }
+         .my-section .kk{
+         float:right;
+         width:35%;
+         }
+         .my-section .kk img{
+         margin-top: 145px;
+         float: right;
+         width:60%;
+         height: auto;
+         margin-top: 210px;
+         margin-right: 220px;
+         transition: 1.5s;
+         }
+         .my-section .kk img:hover{
+         transform:scale(1.1);
+         }
+         .my-intro{
+         width:65%;
+         display: block;
+         padding: 10% 9.5%;
+         margin-top: 120px;
+         top: 35%;
+         left: 10%;
+         height: 400px;
+         float: left;
+         }
+         .my-intro h2{
+         font-size: 60px;
+         font-weight: 700;
+         display: inline-block;
+         position: relative;
+         text-transform: none;
+         -webkit-text-stroke: 1px #f6f7f8;
+         -webkit-text-fill-color: transparent;
+         line-height: 1.2;
+         }
+         .my-intro h1{
+         font-size: 130px;
+         font-weight: 700;
+         margin-bottom: 40px;
+         color: var(--secondary-color);
+         line-height: 1.2;
+         text-transform: none;
+         font-size: 78px;
+         cursor: pointer;
+         }
+         .my-intro h1 span{
+         transition: 0.5s;
+         }
+         .my-intro h1:hover span:nth-child(1)
+         {
+         margin-right: 10px;
+         }
+         .my-intro h1:hover span:nth-child(1):after
+         {
+         content: '';
+         }
+         .my-intro h1:hover span:nth-child(2)
+         {
+         margin-left: 5px;
+         }
+         .my-intro h1:hover span{
+         color:#0b62e3;
+         text-shadow: 0 0 10px #0b62e3;
+         0 0 20px #0b62e3;
+         0 0 40px #0b62e3;
+         0 0 80px #0b62e3;
+         0 0 100px #0b62e3;
+         }
+         @media only screen and (max-width: 1000px)
+         {
+         .my-intro{
+         width: 100%;
+         display: block;
+         float: none;
+         }
+         .kk img{
+         display: none;          
+         }
+         }
+         .course-sec{
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+         align-items: center;
+         }
+         .course-sec .course-card{
+         width: 40%;
+         flex:40%;
+         display: flex;
+         flex-wrap: wrap;
+         position: relative;
+         }
+         .course-sec .course-card img{
+         flex-wrap: wrap;
+         display: flex;
+         width: 700px;
+         height: 400px;
+         }
+         .course-sec .course-card .course-intro{
+         position: absolute;
+         top: 20%;
+         left: 10%;
+         z-index: 2;
+         width: 80%;
+         color: blue;
+         text-align: center;
+         }
+         .course-intro .course-title{
+         font-size: 50px;
+         text-transform: uppercase;
+         font-weight: 500;
+         cursor: pointer;
+         color:#ffeb3b;
+         text-shadow: 0 0 10px #ff8c3b,
+         0 0 20px #ff8c3b,
+         0 0 40px #ff8c3b,
+         0 0 80px #ff8c3b;
+         margin-bottom: 3rem;
+         }
+         @media only screen and (max-width:1000px)
+         {
+         .course-sec{
+         margin-top: 5px;
+         display:block;
+         width:100%;
+         height: auto;
+         }
+         .course-sec .btn{
+         padding: 12px 18px;
+         }
+         .course-sec .course-card img{
+         display: block;
+         width: 500px;
+         height: 350px;
+         }
+         }
+         /*.course-intro p{
+         width: 70%;
+         display: block;
+         margin: 0 auto;
+         font-size: 18px;
+         letter-spacing: 1px;
+         margin-bottom: 3rem;
+         color:#ff8c3b;
+         text-shadow: 0 0 10px #ffeb3b,
+         0 0 20px #ff8c3b,
+         }*/
+         .offer-sec{
+         padding:1rem 0;
+         }
+         .section-title{
+         text-align: center;
+         font-size: 140px;
+         display: block;
+         color: #2c234d;
+         font-weight: 700;
+         text-transform: uppercase;
+         color: #fff;
+         -webkit-text-stroke: 1px #f6f7f8;
+         -webkit-text-fill-color: transparent;
+         padding: 2rem 0;
+         font-size: 550%;
+         }
+         .offer-sec .offer-row{
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+         align-items: center;
+         }
+         .offer-row .offer-card{
+         margin: 0 1rem;
+         width: 350px%;
+         }
+         .offer-row .offer-card .offer-intro{
+         color: var(--secondary-color);
+         text-align: center;
+         }
+         .offer-card .offer-intro h2{
+         font-size: 30px;
+         font-weight: 500;
+         margin: 14px 0;
+         text-transform: uppercase;
+         }
+         .offer-card  img{
+         justify-content: center;
+         align-content: center;
+         width:400px ;
+         transition: transform 2s;
+         height:280px;
+         }
+         .offer-card img:hover{
+         transform:scale(1.1);
+         }
+         .offer-card .offer-intro p{
+         font-size: 16px;
+         width: 90%;
+         text-align: center;
+         display: block;
+         margin: 0 auto;
+         letter-spacing: 1px;
+         font-family: 'Roboto', sans-serif;
+         margin-bottom: 2rem;
+         }
+         .section{
+         width: 100%;
+         padding: 2rem;
+         }
+         .section .container{
+         width: 90%;
+         display: block;
+         margin: 0px auto;
+         padding: 50px 0px;
+         }
+         .container .title{
+         width: 100%;
+         text-align: center;
+         margin-bottom: 50px;
+         }
+         .container .title h1{
+         text-transform: uppercase;
+         font-size: 50px;
+         color: white;
+         }
+         .content{
+         float: left;
+         width: 55%;
+         }
+         .image-section{
+         float: right;
+         width: 40%;
+         }
+         .image-section img{
+         width: 100%;
+         height: auto;
+         }
+         .content .article p{
+         margin-top: 20px;
+         font-size: 25px;
+         line-height: 1.5;
+         color: white;
+         margin-bottom: 3rem;
+         }
+         @media only screen and (max-width: 1000px){
+         .container{
+         display: block;
+         width: 80%;
+         margin: auto;
+         }
+         .content{
+         float: none;
+         width: 100%;
+         margin: auto;
+         display: block;
+         }
+         .image-section{
+         float: none;
+         width: 100%;
+         margin-top: 50px;
+         }
+         .image-section img{
+         width: 100%;
+         height: auto;
+         display: block;
+         margin: rem;
+         }
+         }
+         footer{
+         margin-top: 25rem;
+         padding: 3rem 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         gap: 3rem;
+         background: #1b1f63;
+         }
+         .copyright{
+         font-size: 20px;
+         color: #fff;
+         letter-spacing: 2px;
+         }
+         .copyright span{
+         color: red;
+         font-size: 30px;
+         margin-left: 1rem;
+         }
+         .social-icon{
+         display: flex;
+         gap: 1rem;
+         }
+         .social-icon i{
+         font-size: 20px;
+         padding: 5px 11px;
+         color: #fff;
+         background: blueviolet;
+         transition: .3s;
+         cursor: pointer;
+         }
+         .social-icon i:hover{
+         background: var(--primary-color);
+         }
+      </style>
+   </head>
+   <body>
+      <header>
+         <div class="logo">
+            <h3><span class="secondary-color">Fit</span><span class="primary-color">UVCE</span></h3>
+         </div>
+         <nav>
+            <ul class="nav-menu">
+               <a href="#">
+                  <li>Home</li>
+               </a>
+               <a href="#courses">
+                  <li>Courses</li>
+               </a>
+               <a href="#pricing">
+                  <li>Pricing</li>
+               </a>
+               <a href="#about">
+                  <li>About Us</li>
+               </a>
+               <a href="#contact">
+                  <li>Contact</li>
+               </a>
+            </ul>
+         </nav>
+         <a href="https://forms.gle/JPudbvfc2TujsuFN6" class="btn btn-primary contactBTn">Register</a>
+      </header>
+      <div class="my-section">
+         <div class="my-intro">
+            <h2>Hey! This is Karthikeyan</h2>
+            <h1>President, <span class="secondary-color">Fit</span><span class="primary-color">UVCE</span></h1>
+            <a href="#courses
+               " class="btn btn-secondary">Our Courses</a>
+         </div>
+         <div class="kk">
+            <img src="https://i.ibb.co/VWxNZd2/c6cad535-844d-46db-9544-8fca88087e39.jpg">
+         </div>
+      </div>
+      <a id="courses"></a>
+      <div class="course-sec">
+         <div class="course-card">
+            <img src="https://i.ibb.co/3WLmJVH/istockphoto-1282804431-170667a-2.jpg">
+            <div class="course-intro">
+               <h1 class="course-title">Personal Training</h1>
+               <a href="#pricing" class="btn btn-primary">View Course</a>
+            </div>
+         </div>
+         <div class="course-card">
+            <img src="https://i.ibb.co/THjYndz/1000-F-350007935-2kvg6-F1a-ZIbll-ABM5-Mg-Xj8wt-CRStfe-FY-2.jpg">
+            <div class="course-intro">
+               <h1 class="course-title">Group Training</h1>
+               <a href="#pricing" class="btn btn-primary">View Course</a>
+            </div>
+         </div>
+      </div>
+      <div class="offer-sec">
+         <a id="pricing">
+            <h1 class="section-title">Pricing</h1>
+         </a>
+         <div class="offer-row">
+            <div class="offer-card">
+               <img src="https://media.istockphoto.com/id/615284982/photo/hardcore-body-building-workout.jpg?s=612x612&w=0&k=20&c=kgjtEx_DTKdzGMszp9XrTFhh8qeMNyyX-5LD_kQsPeI=">
+               <div class="offer-intro">
+                  <h2>Body Building</h2>
+                  <p><s>Rs.800</s><br>Rs.649 / month</p>
+               </div>
+            </div>
+            <div class="offer-card">
+               <img src="https://hips.hearstapps.com/hmg-prod/images/muscular-men-drink-his-nutritional-supplement-royalty-free-image-856682612-1549062204.jpg">
+               <div class="offer-intro">
+                  <h2>Muscle Gain</h2>
+                  <p><s>Rs.900</s><br>Rs.699 / month</p>
+               </div>
+            </div>
+            <div class="offer-card">
+               <img src="https://media.istockphoto.com/photos/slim-woman-measuring-her-thin-waist-picture-id503865898?b=1&k=20&m=503865898&s=612x612&w=0&h=8OUrpP0SALOa8yza3VNMaXQ-VQGwhv--P9U-EBiKEdg=">
+               <div class="offer-intro">
+                  <h2>Weight Loss</h2>
+                  <p><s>Rs.750</s><br>Rs.599 / month</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <hr>
+      <a id="about"></a>
+      <div class="section">
+         <div class="container">
+            <div class="title">
+               <h1>About Us</h1>
+            </div>
+            <div class="content">
+               <div class="article">
+                  <p>FitUVCE is one of the major clubs in UVCE....<br>
+                     We train candidates to be physically fit and to stay healthy with proper diet...<br>
+                     We conduct marathons and yoga workshops very frequently...<br>
+                     KAGATHON, a 4K marathon will be organized in the month of February, where the freshers of our college get an opportunity to explore our college & it's surroundings...<BR>
+                     STAY TUNED!!
+                  </p>
+                  <a href="https://uvce.ac.in/" class="btn btn-secondary">Learn More</a>
+               </div>
+            </div>
+            <div class="image-section">
+               <img src="https://uvce.ac.in/img/slides/UVCE_Home9.jpg">
+            </div>
+         </div>
+      </div>
+      <footer>
+         <div class="copyright">
+            <a id="contact">
+               <p>Connect me on:</p>
+            </a>
+         </div>
+         <div class="social-icon">
+            <a href="https://www.linkedin.com/in/karthikeyan-t-3687a225b"><i class="fa-brands fa-linkedin-in"></i></a> | 
+            <a href="tel: +919839836947"><i class="fa-brands fa-whatsapp"></i></a> 
+         </div>
+      </footer>
+   </body>
+</html>
